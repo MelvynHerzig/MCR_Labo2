@@ -30,8 +30,8 @@ public class ArabViewFactory extends ChronometerViewFactory
     }
 
     @Override
-    public ChronometerView createView(Chronometer... chronos)
+    public ChronometerView createView(Chronometer chrono)
     {
-        return new ArabView(chronos);
+        return new ArabView(chrono);
     }
 }

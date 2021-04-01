@@ -7,7 +7,7 @@ import java.awt.*;
 public class RomanView extends AnalogView
 {
 
-    public RomanView(Chronometer... chrono)
+    public RomanView(Chronometer chrono)
     {
         super(chrono);
     }
@@ -15,6 +15,6 @@ public class RomanView extends AnalogView
     @Override
     protected Image getImage()
     {
-        return null;
+        return Toolkit.getDefaultToolkit().getImage("src/views/cadrans/cadran_chiffres_romains.jpg");
     }
 }

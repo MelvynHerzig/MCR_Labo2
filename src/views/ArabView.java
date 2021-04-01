@@ -7,7 +7,7 @@ import java.awt.*;
 public class ArabView extends AnalogView
 {
 
-    public ArabView(Chronometer... chrono)
+    public ArabView(Chronometer chrono)
     {
         super(chrono);
     }
@@ -15,6 +15,6 @@ public class ArabView extends AnalogView
     @Override
     protected Image getImage()
     {
-        return null;
+        return Toolkit.getDefaultToolkit().getImage("src/views/cadrans/cadran_chiffres_arabes.jpg");
     }
 }

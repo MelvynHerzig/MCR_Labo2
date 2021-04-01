@@ -4,56 +4,55 @@ import observables.Chronometer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public abstract class ChronometerView implements Observer
+public abstract class ChronometerView extends JPanel implements Observer
 {
-    protected final int DIMENSION = 200;
+    protected static final int DIMENSION = 200;
 
+    protected Chronometer chronometer;
 
-    protected LinkedList<Chronometer> chronometers;
-    protected LinkedList<JPanel> drawzones;
-
-
-    public ChronometerView(Chronometer... chronos)
+    public ChronometerView(Chronometer chrono)
     {
+        if(chrono == null) return;
 
-        if(chronos == null) return;
-
-        chronometers = new LinkedList<>();
-        drawzones = new LinkedList<>();
-
-        JFrame frame = new JFrame();
-        JPanel container = new JPanel(new FlowLayout(FlowLayout.LEADING));
-
-        for (Chronometer c: chronos)
+        addMouseListener(new MouseAdapter()
         {
-            c.attach(this);
-            chronometers.add(c);
-            JPanel panel = new JPanel();
-            panel.setPreferredSize(new Dimension(DIMENSION, DIMENSION));
-            container.add(panel);
-            drawzones.add(panel);
-        }
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                if(chrono.isRunning())
+                {
+                    chrono.stop();
+                }
+                else
+                {
+                    chrono.start();
+                }
+            }
+        });
 
+        chrono.attach(this);
+        chronometer = chrono;
 
-        frame.getContentPane().add(container, BorderLayout.CENTER);
-        frame.setResizable(false);
-        frame.pack();
-        frame.setVisible(true);
+        repaint();
+    }
 
-        updateView();
+    @Override
+    public Dimension getPreferredSize()
+    {
+        return new Dimension(DIMENSION, DIMENSION);
+    }
+
+    public String getMessage()
+    {
+        return String.format("Chrono #%d", chronometer.getId());
     }
 
     @Override
     public void update()
     {
-        updateView();
+        repaint();
     }
-
-
-    abstract void updateView();
-
-
 }

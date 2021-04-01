@@ -30,8 +30,8 @@ public class NumericViewFactory extends ChronometerViewFactory
     }
 
     @Override
-    public ChronometerView createView(Chronometer... chronos)
+    public ChronometerView createView(Chronometer chrono)
     {
-        return new NumericView(chronos);
+        return new NumericView(chrono);
     }
 }

@@ -7,6 +7,7 @@ import factories.ChronometerViewFactory;
 import factories.NumericViewFactory;
 import factories.RomanViewFactory;
 import observables.Chronometer;
+import views.ChronometerView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,12 +42,11 @@ public class Controller
         // Ajout des panels avec boutons pour chronomètre.
         for (int i = 0; i < nbChrono; ++i)
         {
-            mainPanel.add(createChronoPanel(i + 1));
+            mainPanel.add(createSpecificChronoPanel(i + 1));
         }
 
 
         mainPanel.add(createAllChronoPanel());
-
 
         // Affichage
         frame.pack();
@@ -55,7 +55,7 @@ public class Controller
         frame.setVisible(true);
     }
 
-    private JPanel createChronoPanel(int idChrono)
+    private JPanel createSpecificChronoPanel(int idChrono)
     {
         Chronometer c = new Chronometer(idChrono);
         chronometers.add(c);
@@ -75,14 +75,10 @@ public class Controller
     private JPanel createAllChronoPanel()
     {
         JPanel line = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JLabel lbl = new JLabel("Tous les chronos");
-        JButton b4 = createViewButton(romanViewFactory, "Cadran romain", chronometers.toArray(new Chronometer[0]));
-        JButton b5 = createViewButton(arabViewFactory, "Cadran arabe", chronometers.toArray(new Chronometer[0]));
-        JButton b6 = createViewButton(numericViewFactory, "Cadran numéric", chronometers.toArray(new Chronometer[0]));
-        line.add(lbl);
-        line.add(b4);
-        line.add(b5);
-        line.add(b6);
+        line.add( new JLabel("Tous les chronos"));
+        line.add( createViewButton(romanViewFactory, "Cadran romain", chronometers.toArray(new Chronometer[0])));
+        line.add( createViewButton(arabViewFactory, "Cadran arabe", chronometers.toArray(new Chronometer[0])));
+        line.add( createViewButton(numericViewFactory, "Cadran numéric", chronometers.toArray(new Chronometer[0])));
 
         return line;
     }
@@ -103,7 +99,7 @@ public class Controller
         return button;
     }
 
-    private JButton createViewButton(ChronometerViewFactory factory, String text, Chronometer... c)
+    private JButton createViewButton(ChronometerViewFactory factory, String text, Chronometer... chronos)
     {
         JButton btn = new JButton(text);
         btn.addActionListener(new ActionListener()
@@ -111,11 +107,29 @@ public class Controller
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                factory.createView(c);
+                createFrame(factory, chronos);
             }
         });
 
         return btn;
+    }
+
+    private void createFrame(ChronometerViewFactory factory, Chronometer... chronos)
+    {
+        int dimension = 200;
+
+        JFrame frame = new JFrame();
+        JPanel container = new JPanel(new FlowLayout(FlowLayout.LEADING));
+
+        for (Chronometer chrono: chronos)
+        {
+            ChronometerView view = factory.createView(chrono);
+            container.add(view);
+        }
+
+        frame.getContentPane().add(container, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public static void main(String[] args)

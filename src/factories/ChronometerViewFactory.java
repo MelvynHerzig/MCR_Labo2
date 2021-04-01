@@ -12,8 +12,8 @@ public abstract class ChronometerViewFactory
 {
     /**
      * Crée une ChronometerView
-     * @param chronos Chronomètres que la vue doit afficher
+     * @param chrono Chronomètres que la vue doit afficher
      * @return Retourne la ChronometerView créée
      */
-    public abstract ChronometerView createView(Chronometer... chronos);
+    public abstract ChronometerView createView(Chronometer chrono);
 }

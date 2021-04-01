@@ -30,8 +30,8 @@ public class RomanViewFactory extends ChronometerViewFactory
     }
 
     @Override
-    public ChronometerView createView(Chronometer... chronos)
+    public ChronometerView createView(Chronometer chrono)
     {
-        return new RomanView(chronos);
+        return new RomanView(chrono);
     }
 }
