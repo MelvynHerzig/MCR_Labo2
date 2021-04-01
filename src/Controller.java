@@ -1,8 +1,14 @@
+import buttons.ButtonChronometerManager;
+import buttons.ButtonChronometerPause;
+import buttons.ButtonChronometerReset;
+import buttons.ButtonChronometerStart;
+import factories.ArabViewFactory;
+import factories.ChronometerViewFactory;
+import factories.NumericViewFactory;
+import factories.RomanViewFactory;
 import observables.Chronometer;
-import views.RomanView;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,164 +18,105 @@ public class Controller
 {
     private LinkedList<Chronometer> chronometers;
 
+    private final RomanViewFactory romanViewFactory;
+    private final ArabViewFactory arabViewFactory;
+    private final NumericViewFactory numericViewFactory;
+
     public Controller(Integer nbChrono)
     {
         chronometers = new LinkedList<Chronometer>();
 
-        JFrame controlFrame = new JFrame("Panneau de contrôle");
+        romanViewFactory = RomanViewFactory.getInstance();
+        arabViewFactory = ArabViewFactory.getInstance();
+        numericViewFactory = NumericViewFactory.getInstance();
+
+        // Construction de la fenêtre
+        JFrame frame = new JFrame("Control panel");
+
+        // Panel principal
         JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(nbChrono + 1, 0));
+        frame.getContentPane().add(mainPanel);
 
-        Border padding = BorderFactory.createEmptyBorder(10, 5, 10, 5);
-        mainPanel.setBorder(padding);
-
-        controlFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        controlFrame.getContentPane().add(mainPanel, BorderLayout.CENTER);
-
-        mainPanel.setLayout(new GridLayout(nbChrono + 1, 0, 10, 10));
-
+        // Ajout des panels avec boutons pour chronomètre.
         for (int i = 0; i < nbChrono; ++i)
         {
-            createChronoInterface(mainPanel, i + 1);
+            mainPanel.add(createChronoPanel(i + 1));
         }
 
-        createAllChronoLine(mainPanel);
 
-        controlFrame.setResizable(false);
-        controlFrame.pack();
-        controlFrame.setVisible(true);
+        mainPanel.add(createAllChronoPanel());
+
+
+        // Affichage
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setVisible(true);
     }
 
-    private void createChronoInterface(JPanel mainPanel, int idChrono)
+    private JPanel createChronoPanel(int idChrono)
     {
-        Chronometer chrono = new Chronometer(idChrono);
-        chronometers.add(chrono);
-        JPanel timerPanel = new JPanel();
-        timerPanel.setLayout(new GridLayout(0, 7, 10, 10));
+        Chronometer c = new Chronometer(idChrono);
+        chronometers.add(c);
+        JPanel line = new JPanel();
 
-        JLabel name = new JLabel("Chrono #" + chrono.getId(), JLabel.CENTER);
-        timerPanel.add(name);
+        line.add(new JLabel("Chrono #" + idChrono));
+        line.add(createChronometerManagerButton(new ButtonChronometerStart(), c, "Démarrer"));
+        line.add(createChronometerManagerButton(new ButtonChronometerPause(), c, "Arrêter"));
+        line.add(createChronometerManagerButton(new ButtonChronometerReset(), c, "Réinitialiser"));
+        line.add(createViewButton(romanViewFactory, "Cadran romain", c));
+        line.add(createViewButton(arabViewFactory, "Cadran arabe", c));
+        line.add(createViewButton(numericViewFactory, "Cadran numéric", c));
 
-        JButton start = new JButton("Démarrer");
-        start.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                chrono.start();
-            }
-        });
-        timerPanel.add(start);
-
-        JButton stop = new JButton("Arrêter");
-        stop.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                chrono.stop();
-            }
-        });
-        timerPanel.add(stop);
-
-        JButton reset = new JButton("Réinitialiser");
-        stop.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                chrono.reset();
-            }
-        });
-        timerPanel.add(reset);
-
-        JButton roman = new JButton("Cadran romain");
-        roman.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                new RomanView(chrono);
-            }
-        });
-        timerPanel.add(roman);
-
-        JButton arab = new JButton("Cadran arabe");
-        arab.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                new RomanView(chrono);
-            }
-        });
-        timerPanel.add(arab);
-
-        JButton numeric = new JButton("Cadran numérique");
-        numeric.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                new RomanView(chrono);
-            }
-        });
-        timerPanel.add(numeric);
-
-
-        mainPanel.add(timerPanel);
+        return line;
     }
 
-    private void createAllChronoLine(JPanel mainPanel)
+    private JPanel createAllChronoPanel()
     {
-        JPanel timerPanel = new JPanel();
-        timerPanel.setLayout(new GridLayout(0, 7, 20, 10));
-
-        for (int i = 0; i < 3; ++i)
-        {
-            JLabel tmp = new JLabel();
-            timerPanel.add(tmp);
-        }
-
+        JPanel line = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel lbl = new JLabel("Tous les chronos");
-        timerPanel.add(lbl);
+        JButton b4 = createViewButton(romanViewFactory, "Cadran romain", chronometers.toArray(new Chronometer[0]));
+        JButton b5 = createViewButton(arabViewFactory, "Cadran arabe", chronometers.toArray(new Chronometer[0]));
+        JButton b6 = createViewButton(numericViewFactory, "Cadran numéric", chronometers.toArray(new Chronometer[0]));
+        line.add(lbl);
+        line.add(b4);
+        line.add(b5);
+        line.add(b6);
 
-        JButton roman = new JButton("Cadran romain");
-        roman.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                new RomanView(chronometers);
-            }
-        });
-        timerPanel.add(roman);
-
-        JButton arab = new JButton("Cadran arabe");
-        arab.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                new RomanView(chronometers);
-            }
-        });
-        timerPanel.add(arab);
-
-        JButton numeric = new JButton("Cadran numérique");
-        numeric.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                new RomanView(chronometers);
-            }
-        });
-        timerPanel.add(numeric);
-
-
-        mainPanel.add(timerPanel);
+        return line;
     }
 
+    public static JButton createChronometerManagerButton(ButtonChronometerManager bcm, Chronometer chronometer , String buttonTitle)
+    {
+        JButton button = new JButton(buttonTitle);
+
+        button.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                bcm.manage(chronometer);
+            }
+        });
+
+        return button;
+    }
+
+    private JButton createViewButton(ChronometerViewFactory factory, String text, Chronometer... c)
+    {
+        JButton btn = new JButton(text);
+        btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                factory.createView(c);
+            }
+        });
+
+        return btn;
+    }
 
     public static void main(String[] args)
     {

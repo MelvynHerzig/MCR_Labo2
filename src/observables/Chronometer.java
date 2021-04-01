@@ -19,7 +19,6 @@ public class Chronometer extends Subject implements ActionListener
 
     public void reset()
     {
-        timer.stop();
         elapsedTime = 0;
         notifyObservers();
     }
@@ -50,7 +49,6 @@ public class Chronometer extends Subject implements ActionListener
         if(timer.isRunning())
         {
             ++elapsedTime;
-            System.out.println(id + " " + elapsedTime);
             notifyObservers();
         }
     }

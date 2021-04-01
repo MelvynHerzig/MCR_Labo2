@@ -9,40 +9,51 @@ import java.util.LinkedList;
 
 public abstract class ChronometerView implements Observer
 {
-
-    private LinkedList<Chronometer> chronometers;
-    private JPanel drawzone;
+    protected final int DIMENSION = 200;
 
 
-    public ChronometerView(Chronometer chrono)
+    protected LinkedList<Chronometer> chronometers;
+    protected LinkedList<JPanel> drawzones;
+
+
+    public ChronometerView(Chronometer... chronos)
     {
-        this(new LinkedList<Chronometer>(){{add(chrono);}});
-    }
 
-    public ChronometerView(LinkedList<Chronometer> chronometerList)
-    {
-        this.chronometers = new LinkedList<>();
-        chronometers.addAll(chronometerList);
+        if(chronos == null) return;
 
-        for (Chronometer c: chronometers)
-        {
-            c.attach(this);
-        }
+        chronometers = new LinkedList<>();
+        drawzones = new LinkedList<>();
 
         JFrame frame = new JFrame();
-        drawzone = new JPanel();
+        JPanel container = new JPanel(new FlowLayout(FlowLayout.LEADING));
 
-        frame.getContentPane().add(drawzone, BorderLayout.CENTER);
+        for (Chronometer c: chronos)
+        {
+            c.attach(this);
+            chronometers.add(c);
+            JPanel panel = new JPanel();
+            panel.setPreferredSize(new Dimension(DIMENSION, DIMENSION));
+            container.add(panel);
+            drawzones.add(panel);
+        }
+
+
+        frame.getContentPane().add(container, BorderLayout.CENTER);
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
+
+        updateView();
     }
 
     @Override
     public void update()
     {
-        updateView(drawzone.getGraphics());
+        updateView();
     }
 
-    abstract void updateView(Graphics g);
+
+    abstract void updateView();
+
+
 }

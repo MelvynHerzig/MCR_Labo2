@@ -3,23 +3,18 @@ package views;
 import observables.Chronometer;
 
 import java.awt.*;
-import java.util.LinkedList;
 
 public abstract class AnalogView extends ChronometerView
 {
 
-    public AnalogView(Chronometer chrono)
-    {
-        super(chrono);
-    }
-    public AnalogView(LinkedList<Chronometer> chrono)
+    public AnalogView(Chronometer... chrono)
     {
         super(chrono);
     }
 
 
     @Override
-    void updateView(Graphics g)
+    void updateView()
     {
 
     }
