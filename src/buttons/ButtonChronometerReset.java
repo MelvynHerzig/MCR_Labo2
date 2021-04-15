@@ -3,7 +3,7 @@
  Cours       : MCR
  Fichier     : button.ButtonChronometerReset.java
  Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 01.04.2021
+ Date        : 15.04.2021
  -----------------------------------------------------------------------------------
  */
 
@@ -14,7 +14,8 @@ import observables.Chronometer;
 /**
  * Classe permettant au bouton de réinitialiser un chronomètre.
  * @author Forestier Quentin & Herzig Melvyn
- * @date 01/04/2021
+ * @date 15/04/2021
+ * @version 1.0.0
  */
 public class ButtonChronometerReset extends ButtonChronometerManager
 {

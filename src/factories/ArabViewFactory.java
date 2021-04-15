@@ -1,3 +1,12 @@
+/*
+ -----------------------------------------------------------------------------------
+ Cours       : MCR
+ Fichier     : factories.ArabViewFactory.java
+ Auteur(s)   : Forestier Quentin & Herzig Melvyn
+ Date        : 15.04.2021
+ -----------------------------------------------------------------------------------
+ */
+
 package factories;
 
 import observables.Chronometer;
@@ -7,7 +16,8 @@ import views.ChronometerView;
 /**
  * Classe implémentant une fabrique de vue arabe
  * @author Forestier Quentin & Herzig Melvyn
- * @date 01.04.2021
+ * @date 15.04.2021
+ * @version 1.0.0
  */
 public class ArabViewFactory extends ChronometerViewFactory
 {
@@ -29,6 +39,11 @@ public class ArabViewFactory extends ChronometerViewFactory
         return instance;
     }
 
+    /**
+     * Crée une vue analogique à chiffre arabes.
+     * @param chrono Chronomètres que la vue doit afficher.
+     * @return Retourne la vue pour le chronomètre chrono.
+     */
     @Override
     public ChronometerView createView(Chronometer chrono)
     {
