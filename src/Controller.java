@@ -19,16 +19,16 @@ public class Controller
 {
     private LinkedList<Chronometer> chronometers;
 
-    private final RomanViewFactory romanViewFactory;
-    private final ArabViewFactory arabViewFactory;
+    private final RomanViewFactory   romanViewFactory;
+    private final ArabViewFactory    arabViewFactory;
     private final NumericViewFactory numericViewFactory;
 
     public Controller(Integer nbChrono)
     {
         chronometers = new LinkedList<Chronometer>();
 
-        romanViewFactory = RomanViewFactory.getInstance();
-        arabViewFactory = ArabViewFactory.getInstance();
+        romanViewFactory   = RomanViewFactory.getInstance();
+        arabViewFactory    = ArabViewFactory.getInstance();
         numericViewFactory = NumericViewFactory.getInstance();
 
         // Construction de la fenêtre
@@ -65,8 +65,8 @@ public class Controller
         line.add(createChronometerManagerButton(new ButtonChronometerStart(), c, "Démarrer"));
         line.add(createChronometerManagerButton(new ButtonChronometerPause(), c, "Arrêter"));
         line.add(createChronometerManagerButton(new ButtonChronometerReset(), c, "Réinitialiser"));
-        line.add(createViewButton(romanViewFactory, "Cadran romain", c));
-        line.add(createViewButton(arabViewFactory, "Cadran arabe", c));
+        line.add(createViewButton(romanViewFactory  , "Cadran romain" , c));
+        line.add(createViewButton(arabViewFactory   , "Cadran arabe"  , c));
         line.add(createViewButton(numericViewFactory, "Cadran numéric", c));
 
         return line;
@@ -76,8 +76,8 @@ public class Controller
     {
         JPanel line = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         line.add( new JLabel("Tous les chronos"));
-        line.add( createViewButton(romanViewFactory, "Cadran romain", chronometers.toArray(new Chronometer[0])));
-        line.add( createViewButton(arabViewFactory, "Cadran arabe", chronometers.toArray(new Chronometer[0])));
+        line.add( createViewButton(romanViewFactory  , "Cadran romain" , chronometers.toArray(new Chronometer[0])));
+        line.add( createViewButton(arabViewFactory   , "Cadran arabe"  , chronometers.toArray(new Chronometer[0])));
         line.add( createViewButton(numericViewFactory, "Cadran numéric", chronometers.toArray(new Chronometer[0])));
 
         return line;
