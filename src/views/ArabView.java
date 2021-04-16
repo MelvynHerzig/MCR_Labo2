@@ -1,16 +1,8 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : views.ArabView.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package views;
 
 import observables.Chronometer;
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  * Classe implémentant une vue à cadran avec chiffres arabes sur le chronomètre.

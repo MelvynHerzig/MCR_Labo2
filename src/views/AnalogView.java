@@ -1,16 +1,12 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : views.AnalogView.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package views;
 
 import observables.Chronometer;
-import java.awt.*;
+
+import java.awt.Image;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
 import java.awt.geom.Line2D;
 
 /**

@@ -1,12 +1,3 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : Controller.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 import buttons.ButtonChronometerManager;
 import buttons.ButtonChronometerPause;
 import buttons.ButtonChronometerReset;
@@ -18,8 +9,13 @@ import factories.RomanViewFactory;
 import observables.Chronometer;
 import views.ChronometerView;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;

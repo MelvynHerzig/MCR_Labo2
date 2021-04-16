@@ -1,12 +1,3 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : button.ButtonChronometerManager.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package buttons;
 
 import observables.Chronometer;

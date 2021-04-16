@@ -1,15 +1,6 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : observables.Chronometer.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package observables;
 
-import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

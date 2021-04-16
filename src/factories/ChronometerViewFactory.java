@@ -1,12 +1,3 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : factories.ChronometerViewFactory.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package factories;
 
 import observables.Chronometer;

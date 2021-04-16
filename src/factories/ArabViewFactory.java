@@ -1,12 +1,3 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : factories.ArabViewFactory.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package factories;
 
 import observables.Chronometer;
@@ -21,8 +12,14 @@ import views.ChronometerView;
  */
 public class ArabViewFactory extends ChronometerViewFactory
 {
+    /**
+     * Instance de l'usine.
+     */
     private static ArabViewFactory instance;
 
+    /**
+     * Constructeur.
+     */
     private ArabViewFactory(){}
 
     /**

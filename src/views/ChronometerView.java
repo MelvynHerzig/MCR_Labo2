@@ -1,18 +1,9 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : views.ChronometerView.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package views;
 
 import observables.Chronometer;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

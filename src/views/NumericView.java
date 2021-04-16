@@ -1,16 +1,7 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : views.NumericView.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package views;
 
 import observables.Chronometer;
-import java.awt.*;
+import java.awt.Graphics;
 
 /**
  * Classe implémentant une vue numérique sur un chronomètre.

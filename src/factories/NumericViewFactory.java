@@ -1,12 +1,3 @@
-/*
- -----------------------------------------------------------------------------------
- Cours       : MCR
- Fichier     : factories.NumericViewFactory.java
- Auteur(s)   : Forestier Quentin & Herzig Melvyn
- Date        : 15.04.2021
- -----------------------------------------------------------------------------------
- */
-
 package factories;
 
 import observables.Chronometer;
@@ -21,8 +12,14 @@ import views.NumericView;
  */
 public class NumericViewFactory extends ChronometerViewFactory
 {
+    /**
+     * Instance de l'usine.
+     */
     private static NumericViewFactory instance;
 
+    /**
+     * Constructeur.
+     */
     private NumericViewFactory(){}
 
     /**
