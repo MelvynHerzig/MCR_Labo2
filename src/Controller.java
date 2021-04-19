@@ -37,23 +37,12 @@ public class Controller
     private final LinkedList<Chronometer> chronometers;
 
     /**
-     * Usines à observers, vue qui affichent les chronomètres.
-     */
-    private final ArabViewFactory    arabViewFactory;
-    private final RomanViewFactory   romanViewFactory;
-    private final NumericViewFactory numericViewFactory;
-
-    /**
      * Constructeur.
      * @param nbChrono nombre de chronomètre à prendre en charge.
      */
     public Controller(Integer nbChrono)
     {
         chronometers = new LinkedList<Chronometer>();
-
-        arabViewFactory    = ArabViewFactory.getInstance();
-        romanViewFactory   = RomanViewFactory.getInstance();
-        numericViewFactory = NumericViewFactory.getInstance();
 
         // Construction de la fenêtre principale.
         JFrame frame = new JFrame("Control panel");
@@ -94,9 +83,9 @@ public class Controller
         line.add(createChronometerManagerButton(new ButtonChronometerStart(), c, "Démarrer"));
         line.add(createChronometerManagerButton(new ButtonChronometerPause(), c, "Arrêter"));
         line.add(createChronometerManagerButton(new ButtonChronometerReset(), c, "Réinitialiser"));
-        line.add(createViewButton(romanViewFactory  , "Cadran romain" , c));
-        line.add(createViewButton(arabViewFactory   , "Cadran arabe"  , c));
-        line.add(createViewButton(numericViewFactory, "Cadran numéric", c));
+        line.add(createViewButton(RomanViewFactory.getInstance()  , "Cadran romain" , c));
+        line.add(createViewButton(ArabViewFactory.getInstance()   , "Cadran arabe"  , c));
+        line.add(createViewButton(NumericViewFactory.getInstance(), "Cadran numéric", c));
 
         return line;
     }
@@ -109,9 +98,9 @@ public class Controller
     {
         JPanel line = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         line.add( new JLabel("Tous les chronos"));
-        line.add( createViewButton(romanViewFactory  , "Cadran romain" , chronometers.toArray(new Chronometer[0])));
-        line.add( createViewButton(arabViewFactory   , "Cadran arabe"  , chronometers.toArray(new Chronometer[0])));
-        line.add( createViewButton(numericViewFactory, "Cadran numéric", chronometers.toArray(new Chronometer[0])));
+        line.add( createViewButton(RomanViewFactory.getInstance()  , "Cadran romain" , chronometers.toArray(new Chronometer[0])));
+        line.add( createViewButton(ArabViewFactory.getInstance()   , "Cadran arabe"  , chronometers.toArray(new Chronometer[0])));
+        line.add( createViewButton(NumericViewFactory.getInstance(), "Cadran numéric", chronometers.toArray(new Chronometer[0])));
 
         return line;
     }
